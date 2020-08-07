@@ -1,0 +1,29 @@
+<div class="input-array-container" [style.width]="inputArrayWidth" [@check]="checkSelfAnimation">
+  <lib-input-ex [inputCategory]="category"
+                [inputLabel]="inputLabel"
+                [inputIsRequired]="inputIsRequired"
+                [inputLabelWidth]="inputLabelWidth"
+                [inputMaxlength]="inputMaxlength"
+                [inputMinlength]="inputMinlength"
+                [inputPattern]="inputArrayPattern"
+                [inputMax]="inputMax"
+                [inputMin]="inputMin"
+                [inputPlaceholder]="inputPlaceholder"
+                [inputResetObject]="currentObjectValue"
+                [validatorFns]="inputValidatorFns"
+                [validatorMessage]="validatorMessage"
+                [inputDisabled]="inputDisabled"
+                (commitEvent)="commitValue($event)">
+  </lib-input-ex>
+  <div [style.margin-left.px]='inputLabelWidth'>
+    <div class="input-array-content-container" *ngFor="let value of items;let i = index">
+      <span class="label label-light-blue">{{value}}</span>
+      <a [class.disabled]="inputDisabled || isFixedItem(value)"
+         href="javascript: void(0)"
+         (click)="deleteItem(value)">
+        <clr-icon shape="times-circle" class="is-solid"></clr-icon>
+      </a>
+    </div>
+  </div>
+</div>
+

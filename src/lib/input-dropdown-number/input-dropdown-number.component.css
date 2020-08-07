@@ -1,0 +1,47 @@
+
+div.input-dropdown-container{
+  position: relative;
+}
+
+div.items-container{
+  position: absolute;
+  background-color: white;
+  top: 30px;
+  padding: 10px;
+  overflow-y: auto;
+  border: 1px solid darkgrey;
+  border-radius: 2px;
+  display: flex;
+  flex-direction: column;
+}
+
+div.empty {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+div.empty clr-icon {
+  color: orange;
+}
+
+div.dropdown-item {
+  font-size: 16px;
+  text-align: left;
+  height: 1.0rem;
+  padding-left: 5px;
+  border-radius: 2px;
+  display: flex;
+}
+
+div.dropdown-item.active{
+  background-color: lightcyan;
+}
+
+div.dropdown-item:hover {
+  font-size: 18px;
+  cursor: pointer;
+  background-color: silver;
+}
+
+

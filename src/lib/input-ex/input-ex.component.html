@@ -1,0 +1,59 @@
+<div class="input-ex-container" [style.width]="inputWidth" [formGroup]="inputFormGroup">
+  <div *ngIf="inputControl.pending" class="pending-mask"></div>
+  <label *ngIf="showLabel"
+         class="input-ex-label"
+         [title]="inputLabel"
+         [style.minWidth.px]="inputLabelWidth"
+         (mousedown)="onEditClick()"
+         (click)="onEditClick()">
+    {{inputLabel}}:
+  </label>
+  <span *ngIf="inputIsRequired" class="asterisk">*</span>
+  <label aria-haspopup="true"
+         role="tooltip"
+         class="input-ex-field-container tooltip"
+         (mousedown)="onEditClick()"
+         [class.tooltip-validation]="inputControl.enabled"
+         [class.tooltip-bottom-left]="toolTipPosition === 'bottom-left'"
+         [class.tooltip-bottom-right]="toolTipPosition === 'bottom-right'"
+         [class.tooltip-top-left]="toolTipPosition === 'top-left'"
+         [class.tooltip-top-right]="toolTipPosition === 'top-right'"
+         [class.invalid]="inputControl.invalid && inputControl.touched">
+    <input #input
+           formControlName="inputControl"
+           class="input-ex-input"
+           [type]="inputFieldTypeName"
+           [class.click-model]="inputControl.enabled && inputType == 2"
+           [class.source-password]="sourcePassword"
+           [class.verify-password]="verifyPassword"
+           [title]="inputControl.value"
+           [placeholder]="inputPlaceholder"
+           (input)="onInput($event)"
+           (blur)="onInputBlur()"
+           (focus)="onInputFocus()">
+    <span *ngIf="inputControl.errors" class="tooltip-content">
+      {{getValidatorMessage(inputControl.errors)}}{{inputValidatorParam}}
+    </span>
+  </label>
+  <a *ngIf="inputStatus == 2 && inputControl.enabled"
+     href="javascript:void(0)"
+     class="input-ex-icon"
+     (click)="onEditClick()">
+    <clr-icon shape="note"></clr-icon>
+  </a>
+  <a *ngIf="inputStatus == 1 && inputControl.enabled && !inputControl.pending"
+     href="javascript:void(0)"
+     class="input-ex-icon"
+     (click)="onCommitClick($event)">
+    <clr-icon shape="check"></clr-icon>
+  </a>
+  <a *ngIf="inputStatus == 1 && inputControl.errors"
+     href="javascript:void(0)"
+     class="input-ex-icon"
+     (click)="onRevertClick()">
+    <clr-icon shape="refresh"></clr-icon>
+  </a>
+  <clr-icon *ngIf="inputDisabled" shape="lock"></clr-icon>
+  <span *ngIf="inputControl.pending" class="spinner spinner-sm"></span>
+</div>
+

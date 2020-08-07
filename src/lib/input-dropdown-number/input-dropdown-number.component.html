@@ -1,0 +1,46 @@
+<div class="input-dropdown-container" #inputDropdownContainer>
+  <lib-input-ex [inputCategory]="2"
+                [inputDisabled]="disabled"
+                [validatorFns]="[validInputFunBind]"
+                [inputPlaceholder]="placeholder"
+                [inputMin]="min"
+                [inputMax]="max"
+                [inputLabelWidth]="labelWidth"
+                [inputIsRequired]="isRequired"
+                [inputLabel]="label"
+                [inputWidth]="dropdownMinWidth"
+                [toolTipPosition]="'top-left'"
+                [validatorMessage]="validatorMessage"
+                [inputDefaultValue]="activeItem"
+                (commitEvent)="commitEvent($event)"
+                (editEvent)="editEvent()"
+                (inputEvent)="inputChanges($event)">
+  </lib-input-ex>
+  <div *ngIf="showDropdownList"
+       class="items-container"
+       [style.width.px]="itemsContainerWidth"
+       [style.margin-left.px]="labelWidth + 15">
+    <label><b>{{menuHeader}}</b></label>
+    <label><b>min:{{min}},max:{{max}}</b></label>
+    <div *ngFor="let item of dropdownItems">
+      <div *ngIf="isDefaultTemplate"
+           class="dropdown-item"
+           [class.active]="itemActive(item)"
+           (click)="changeItemSelect(item, $event)">
+        <span>{{validNumberStart(item)}}</span>
+        <span style="color: blue"><b>{{validNumberMiddle(item)}}</b></span>
+        <span>{{validNumberEnd(item)}}</span>
+        <span *ngIf="isInUsed(item)"
+              style="color: darkblue; font-style: italic; font-size: 12px;margin-left: auto;margin-right: 5px;">used</span>
+      </div>
+      <ng-container *ngIf="isCustomTemplate"
+                    [ngTemplateOutlet]="itemTemp.templateRef"
+                    [ngTemplateOutletContext]="item">
+      </ng-container>
+    </div>
+    <div *ngIf="isEmptyList" class="empty">
+      <span>No item for select</span>
+      <clr-icon shape="error-standard"></clr-icon>
+    </div>
+  </div>
+</div>
