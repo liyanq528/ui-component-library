@@ -58,6 +58,7 @@ export class InputExComponent implements OnInit, CheckSelfValid, OnDestroy {
   @Input() validatorMessage: Array<{ key: string, message: string }>;
   @Input() inputUpdateOn: 'change' | 'blur' | 'submit' = 'blur';
   @Input() toolTipPosition = 'bottom-left';
+  @Input() toolTipSize: 'sm' | 'lg' | 'xs' | 'md' = 'md';
   @Output() editEvent: EventEmitter<any>;
   @Output() inputEvent: EventEmitter<any>;
   @Output() revertEvent: EventEmitter<any>;
@@ -86,7 +87,7 @@ export class InputExComponent implements OnInit, CheckSelfValid, OnDestroy {
     this.inputControl = this.fb.control({value: '', disabled: this.isDisabled});
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.inputFormGroup = this.fb.group({inputControl: this.inputControl}, {updateOn: this.inputUpdateOn});
     this.valueSubscription = this.inputControl.valueChanges.subscribe((value: any) => this.valueChanges.next(value));
     this.statusSubscription = this.inputControl.statusChanges.subscribe((value: any) => {
@@ -160,6 +161,9 @@ export class InputExComponent implements OnInit, CheckSelfValid, OnDestroy {
   }
 
   getValidatorMessage(errors: ValidationErrors): string {
+    if (!errors) {
+      return '';
+    }
     this.inputValidatorParam = '';
     let result = '';
     this.validatorMessage.forEach(value => {

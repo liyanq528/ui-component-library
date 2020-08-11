@@ -5,23 +5,49 @@ div.input-ex-container {
   position: relative;
 }
 
-label.input-ex-label {
+span.input-ex-label {
   white-space: nowrap;
   text-align: right;
   text-wrap: none;
   line-height: 30px;
-  overflow:hidden;
-  text-overflow:ellipsis;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 span.asterisk {
   color: #FF0000;
 }
 
+clr-tooltip-content {
+  background-color: #FF0000 !important;
+  color: white !important;
+  margin: 2px !important;
+}
+
+clr-tooltip-content.tooltip-bottom-right::before {
+  border-left-color: #FF0000 !important;
+  border-bottom-color: #FF0000 !important;
+}
+
+clr-tooltip-content.tooltip-top-right::before {
+  border-left-color: #FF0000 !important;
+  border-top-color: #FF0000 !important;
+}
+
+clr-tooltip-content.tooltip-bottom-left::before {
+  border-right-color: #FF0000 !important;
+  border-bottom-color: #FF0000 !important;
+}
+
+clr-tooltip-content.tooltip-top-left::before {
+  border-right-color: #FF0000 !important;
+  border-top-color: #FF0000 !important;
+}
+
 label.input-ex-field-container {
-  height: 30px;
-  margin-left: 10px;
-  flex-basis: 100%;
+  display: flex;
+  align-items: center;
+  width: 100%;
 }
 
 input.input-ex-input {
@@ -34,20 +60,20 @@ input.input-ex-input {
   text-overflow: ellipsis;
 }
 
-input.source-password {
-
-}
-
-input.verify-password {
-
-}
-
 input.input-ex-input.click-model {
   opacity: 1;
 }
 
 input.input-ex-input.click-model:hover {
   cursor: pointer;
+}
+
+input.source-password {
+
+}
+
+input.verify-password {
+
 }
 
 input::placeholder {
