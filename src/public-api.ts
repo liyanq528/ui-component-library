@@ -11,3 +11,4 @@ export { ItemTempDirective } from './lib/directives/item-temp.directive';
 export { InputDropdownNumberComponent } from './lib/input-dropdown-number/input-dropdown-number.component';
 export { InputExComponent } from './lib/input-ex/input-ex.component';
 export { InputArrayExComponent } from './lib/input-array-ex/input-array-ex.component';
+export { DropdownExComponent } from './lib/dropdown-ex/dropdown-ex.component';

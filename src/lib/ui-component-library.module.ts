@@ -7,15 +7,14 @@ import { InputArrayExComponent } from './input-array-ex/input-array-ex.component
 import { InputExComponent } from './input-ex/input-ex.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ClarityModule } from '@clr/angular';
-
-
-
+import { ClarityModule, ClrPopoverToggleService } from '@clr/angular';
+import { DropdownExComponent } from './dropdown-ex/dropdown-ex.component';
 
 @NgModule({
   declarations: [
     InputExComponent,
     InputArrayExComponent,
+    DropdownExComponent,
     EspecialTempDirective,
     TitleTempDirective,
     ItemTempDirective,
@@ -30,10 +29,15 @@ import { ClarityModule } from '@clr/angular';
   exports: [
     InputExComponent,
     InputArrayExComponent,
+    DropdownExComponent,
     InputDropdownNumberComponent,
     EspecialTempDirective,
     TitleTempDirective,
     ItemTempDirective
+  ],
+  providers: [
+    ClrPopoverToggleService
   ]
 })
-export class UiComponentLibraryModule { }
+export class UiComponentLibraryModule {
+}

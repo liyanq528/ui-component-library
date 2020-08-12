@@ -21,7 +21,7 @@ span.asterisk {
 clr-tooltip-content {
   background-color: #FF0000 !important;
   color: white !important;
-  margin: 2px !important;
+  margin: 4px !important;
 }
 
 clr-tooltip-content.tooltip-bottom-right::before {

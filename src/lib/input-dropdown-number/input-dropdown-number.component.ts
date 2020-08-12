@@ -87,7 +87,7 @@ export class InputDropdownNumberComponent implements OnInit, CheckSelfValid, Aft
     return this.inputContent !== undefined && !Number.isNaN(this.inputContent);
   }
 
-  get validInputFunBind(): void {
+  get validInputFunBind(): any {
     return this.validInputFun.bind(this);
   }
 

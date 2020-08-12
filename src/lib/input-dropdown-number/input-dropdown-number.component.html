@@ -19,7 +19,7 @@
   <div *ngIf="showDropdownList"
        class="items-container"
        [style.width.px]="itemsContainerWidth"
-       [style.margin-left.px]="labelWidth + 15">
+       [style.margin-left.px]="labelWidth">
     <label><b>{{menuHeader}}</b></label>
     <label><b>min:{{min}},max:{{max}}</b></label>
     <div *ngFor="let item of dropdownItems">

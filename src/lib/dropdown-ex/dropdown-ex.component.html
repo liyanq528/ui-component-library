@@ -1,0 +1,109 @@
+<div class="clr-row clr-flex-nowrap clr-align-items-center">
+  <label class="label-title"
+         *ngIf="dropdownLabel !== ''"
+         [style.width.px]="dropdownLabelWidth">
+    {{dropdownLabel}}:<span *ngIf="dropdownIsRequired">*</span>
+  </label>
+  <div *ngIf="isPreparing"
+       [ngStyle]="{'min-width':dropdownMinWidth + 'px'}"
+       class="base-show preparing">
+    <span>Preparing items...</span>
+    <span class="spinner spinner-sm"></span>
+  </div>
+  <div *ngIf="dropdownDisabled" [ngStyle]="{'min-width':dropdownMinWidth + 'px'}" class="base-show disabled">
+    <span *ngIf="isNormalTile || notSelect">{{activeText}}</span>
+    <ng-container *ngIf="isSingleCustomTile"
+                  [ngTemplateOutlet]="titleTemp.templateRef"
+                  [ngTemplateOutletContext]="dropdownActiveItem">
+    </ng-container>
+    <ng-container *ngIf="isMultipleCustomTile"
+                  [ngTemplateOutlet]="titleTemp.templateRef"
+                  [ngTemplateOutletContext]="dropdownActiveItems">
+    </ng-container>
+    <clr-icon shape="lock"></clr-icon>
+  </div>
+  <clr-dropdown #dropdownEx *ngIf="isReadied" [clrCloseMenuOnItemClick]="true">
+    <div [class.active]="active"
+         [@check]="checkSelfAnimation"
+         [ngStyle]="{'min-width':dropdownMinWidth + 'px'}"
+         class="clr-align-items-center base-show"
+         clrDropdownToggle>
+      <span *ngIf="isNormalTile || notSelect">{{activeText}}</span>
+      <ng-container *ngIf="isSingleCustomTile"
+                    [ngTemplateOutlet]="titleTemp.templateRef"
+                    [ngTemplateOutletContext]="dropdownActiveItem">
+      </ng-container>
+      <ng-container *ngIf="isMultipleCustomTile"
+                    [ngTemplateOutlet]="titleTemp.templateRef"
+                    [ngTemplateOutletContext]="dropdownActiveItems">
+      </ng-container>
+      <div class="dropdown-icon" [class.open-menu]="active" [class.close-menu]="!active">
+        <clr-icon shape="caret up"></clr-icon>
+      </div>
+    </div>
+    <clr-dropdown-menu #dropdownExMenu
+                       [ngStyle]="{'min-width':dropdownMinWidth + 'px'}"
+                       [clrPosition]="dropdownPosition">
+      <label class="dropdown-header">{{dropdownMenuHeader}}</label>
+      <div *ngIf="dropdownShowSearch" class="search-container">
+        <label for="search"></label>
+        <input id="search"
+               type="text"
+               (input)="filterExecute($event)">
+        <clr-icon shape="search"></clr-icon>
+      </div>
+      <div *ngIf="isEspecialTemplate"
+           class="dropdown-item-especial"
+           [class.active]="itemActive(dropdownEspecialItem)">
+        <button type="button"
+                clrDropdownItem
+                (click)="changeEspecialItemSelect()">
+          <ng-container [ngTemplateOutlet]="especialTemp.templateRef"
+                        [ngTemplateOutletContext]="dropdownEspecialItem">
+          </ng-container>
+        </button>
+        <span class="dropdown-divider"></span>
+      </div>
+      <div *ngFor="let item of dropdownItems;let i = index"
+           [style.display]="itemDisplayNone(item) ? 'none' : 'block'"
+           [class.active]="itemActive(item)"
+           class="clr-row clr-flex-nowrap clr-align-items-center dropdown-item-container">
+        <button *ngIf="dropdownModel === 'single'"
+                type="button"
+                clrDropdownItem
+                [disabled]="itemDisabled(item)"
+                (click)="changeItemSelect(item)">
+          <span *ngIf="isDefaultTemplate">{{getItemDescription(item)}}</span>
+          <ng-container *ngIf="isCustomTemplate"
+                        [ngTemplateOutlet]="itemTemp.templateRef"
+                        [ngTemplateOutletContext]="item">
+          </ng-container>
+        </button>
+        <button *ngIf="dropdownModel === 'multiple'"
+                class="multiple-container"
+                type="button"
+                clrDropdownItem
+                (click)="setMultipleSelect(item)">
+          <clr-icon shape="success-standard" [class.is-solid]="itemActive(item)"></clr-icon>
+          <span *ngIf="isDefaultTemplate">{{getItemDescription(item)}}</span>
+          <ng-container *ngIf="isCustomTemplate"
+                        [ngTemplateOutlet]="itemTemp.templateRef"
+                        [ngTemplateOutletContext]="item">
+          </ng-container>
+        </button>
+      </div>
+      <span *ngIf="hasNoDataForSearch || isEmptyList" class="dropdown-divider"></span>
+      <div *ngIf="hasNoDataForSearch" class="empty">
+        <span>No item for search</span>
+        <clr-icon shape="error-standard"></clr-icon>
+      </div>
+      <div *ngIf="isEmptyList" class="empty">
+        <span>No item for select</span>
+        <clr-icon shape="error-standard"></clr-icon>
+      </div>
+    </clr-dropdown-menu>
+  </clr-dropdown>
+</div>
+
+
+
