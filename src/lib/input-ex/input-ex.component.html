@@ -3,8 +3,11 @@
      [formGroup]="inputFormGroup">
   <div *ngIf="inputControl.pending" class="pending-mask"></div>
   <label class="input-ex-field-container" (click)="onEditClick()">
-    <span [title]="inputLabel" [style.minWidth.px]="inputLabelWidth" class="input-ex-label">
-      {{inputLabel}}:
+    <span *ngIf="inputLabel != ''"
+          [title]="inputLabel"
+          [style.minWidth.px]="inputLabelWidth"
+          class="input-ex-label">
+      {{inputLabel}}<span *ngIf="inputIsRequired" class="asterisk">*</span>:
     </span>
     <input #input
            class="clr-input input-ex-input"
